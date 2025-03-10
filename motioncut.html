@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Bucket List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🎯 My Bucket List</h1>
+    </header>
+    <main>
+        <section class="bucket-container">
+            <ul class="bucket-list" id="bucketList">
+                <li>
+                    <span class="item-text">Visit the Northern Lights</span>
+                    <button class="action-button complete" onclick="markComplete(this)">Mark Complete</button>
+                    <button class="action-button remove" onclick="removeItem(this)">Remove</button>
+                </li>
+                <li>
+                    <span class="item-text">Scuba Dive in the Great Barrier Reef</span>
+                    <button class="action-button complete" onclick="markComplete(this)">Mark Complete</button>
+                    <button class="action-button remove" onclick="removeItem(this)">Remove</button>
+                </li>
+                <li>
+                    <span class="item-text">Hike Mount Everest Base Camp</span>
+                    <button class="action-button complete" onclick="markComplete(this)">Mark Complete</button>
+                    <button class="action-button remove" onclick="removeItem(this)">Remove</button>
+                </li>
+            </ul>
+
+            <div class="add-item">
+                <input type="text" id="newItem" placeholder="Add a new adventure...">
+                <button class="add-button" onclick="addItem()">➕ Add</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function addItem() {
+            const newItemInput = document.getElementById('newItem');
+            const newItemText = newItemInput.value.trim();
+
+            if (newItemText) {
+                const bucketList = document.getElementById('bucketList');
+
+                const newListItem = document.createElement('li');
+                newListItem.innerHTML = `
+                    <span class="item-text">${newItemText}</span>
+                    <button class="action-button complete" onclick="markComplete(this)">Mark Complete</button>
+                    <button class="action-button remove" onclick="removeItem(this)">Remove</button>
+                `;
+
+                bucketList.appendChild(newListItem);
+                newItemInput.value = '';
+            }
+        }
+
+        function removeItem(button) {
+            const listItem = button.parentElement;
+            listItem.remove();
+        }
+
+        function markComplete(button) {
+            const listItem = button.parentElement;
+            listItem.classList.toggle('completed');
+        }
+    </script>
+</body>
+</html>
